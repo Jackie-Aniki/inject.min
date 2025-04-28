@@ -1,7 +1,7 @@
 {
   "name": "inject.min",
-  "version": "1.6.4",
-  "description": "lightweight typescript dependency injection in 2024",
+  "version": "2.0.0",
+  "description": "super easy and super small dependency injection - all that you need | no need to register | can override | can use inject | can use decorators",
   "keywords": [
     "typescript",
     "javascript",
@@ -33,10 +33,10 @@
     "@types/jest": "^29.5.14",
     "chef-express": "^2.4.2",
     "jest": "^29.7.0",
-    "prettier": "^3.4.2",
+    "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
-    "typedoc": "^0.27.6",
-    "typescript": "^5.7.3"
+    "typedoc": "^0.28.3",
+    "typescript": "^5.8.3"
   },
   "scripts": {
     "format": "prettier . --write",

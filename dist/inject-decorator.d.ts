@@ -1,4 +1,4 @@
-import { BaseObject, BaseClass } from './types';
+import { BaseClass, BaseObject } from './types';
 export declare function Inject<T extends BaseObject>(
   Class: BaseClass<T>,
   props?: any

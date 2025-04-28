@@ -12,6 +12,23 @@ super easy and super small dependency injection - all that you need
 - can use inject
 - can use decorators
 
+#### the problem
+
+1. you have a tree of objects
+2. one day you decide to have a similarly constructed component
+3. but the problem is at some branch/leaf you want a different class
+4. the rest is the same
+
+#### solution
+
+1. in the branch/leaf use `DIContainer.getClass(Slot)` to get class of `Slot`
+2. in the cloned component use `DIContainer.setClass(Slot, NewComponent)`
+
+#### result
+
+1. in original component that resolves to `Slot`
+2. in cloned component that resolves to `NewComponent`
+
 ### example without decorators
 
 ```ts
@@ -25,22 +42,31 @@ class Override extends Original {
   name = 'override';
 }
 
-class TestOverride {
+class TestGet {
   constructor() {
-    DIContainer.bind(Original, Override);
-
     const Class = DIContainer.getClass(Original);
-    const instance = DIContainer.get(Original);
+    const instance = new Class();
 
-    console.log(instance.name); // 'override'
-    console.log(Class === Override); // true
+    console.log(Class.name, instance.name);
   }
 }
 
+class TestOverride extends TestGet {
+  constructor() {
+    DIContainer.setClass(Original, Override);
+
+    super();
+  }
+}
+
+// 'Original', 'original'
+new TestGet();
+
+// 'Override', 'override'
 new TestOverride();
 ```
 
-### to use decorators (optional)
+### using with decorators (optional step)
 
 modify your `tsconfig.json`
 

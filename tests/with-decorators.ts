@@ -1,4 +1,4 @@
-import { Inject, DIContainer } from '../src';
+import { DIContainer, Inject } from '../src';
 
 class Example {
   value!: string;
@@ -56,10 +56,10 @@ class TestOverride {
   @Inject(Original) test!: Original;
 
   constructor() {
-    DIContainer.bind(Original, Override);
+    DIContainer.setClass(Original, Override);
 
     const Class = DIContainer.getClass(Original);
-    const instance = DIContainer.get(Original);
+    const instance = new Class();
 
     console.log(instance.name); // 'override'
     console.log(Class === Override); // true

@@ -1,19 +1,19 @@
 const { DIContainer } = require('../dist');
 
 describe('GIVEN DIContainer', () => {
-  it('THEN get(Class) work', () => {
+  it('THEN getInstance(Class) does work', () => {
     class GetExample {
       value = {
         whatever: 'foo'
       };
     }
 
-    const instance = DIContainer.get(GetExample);
+    const instance = DIContainer.getInstance(GetExample);
 
     expect(instance.value.whatever).toBe('foo');
   });
 
-  describe('WHEN bind(Original, Override)', () => {
+  describe('WHEN setClass(Original, Override)', () => {
     class Original {
       value = {
         key: 'this is a base value'
@@ -26,15 +26,15 @@ describe('GIVEN DIContainer', () => {
       };
     }
 
-    DIContainer.bind(Original, Override);
+    DIContainer.setClass(Original, Override);
 
-    it('THEN bind() does work', () => {
-      const instance = DIContainer.get(Original);
+    it('THEN getInstance(Original) returns override instance', () => {
+      const instance = DIContainer.getInstance(Original);
 
       expect(instance.value.key).not.toBe('this is a base value');
     });
 
-    it('AND getClass(Original) === Override work', () => {
+    it('AND new getClass(Original) returns override instance', () => {
       const Class = DIContainer.getClass(Original);
 
       expect(Class).toBe(Override);

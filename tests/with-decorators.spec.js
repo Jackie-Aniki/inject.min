@@ -1,7 +1,7 @@
 const { spawnSync } = require('child_process');
 
 describe('GIVEN @Inject decorator', () => {
-  it('THEN @Inject() and DIContainer.bind(Original, Override) work', () => {
+  it('THEN @Inject() and DIContainer.setClass(Original, Override) work', () => {
     const {
       output: [, lines]
     } = spawnSync('ts-node', ['tests/with-decorators.ts'], {

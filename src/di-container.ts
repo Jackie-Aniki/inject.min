@@ -5,11 +5,22 @@ export class DIContainer {
   protected static instances: Record<string, Record<string, BaseObject>> = {};
 
   /**
-   * for future references overwrite Original class with Override
+   * get the Class/Override that was used with setClass
+   * @param Original the class to search for in DIContainer
+   * @returns {BaseClass}
+   */
+  static getClass<T extends BaseObject>(Original: BaseClass<T>): BaseClass<T> {
+    const Override = this.overrides[Original.name] as BaseClass<T> | undefined;
+
+    return Override || Original;
+  }
+
+  /**
+   * for future references override Original class with Override
    * @param Original the class to search for in DIContainer
    * @param Override the extended class to replace that first one
    */
-  static bind<T extends BaseObject>(
+  static setClass<T extends BaseObject>(
     Original: BaseClass<T>,
     Override: BaseClass<T>
   ): void {
@@ -17,45 +28,36 @@ export class DIContainer {
   }
 
   /**
-   * get instance of Class/Override unique with constructor props
-   * @param Class the class to search for in DIContainer
+   * get instance of Class/Override that was used with setClass with optional props
+   * @param Original the class to search for in DIContainer
    * @param props the optional props for constructor of instance
    * @returns {instanceof Class}
    */
-  static get<T extends BaseObject>(Class: BaseClass<T>, ...props: any[]): T {
+  static getInstance<T extends BaseObject>(
+    Original: BaseClass<T>,
+    ...props: any[]
+  ): T {
     const propertyKey = DIContainer.createPropertyKey(props);
 
-    if (!DIContainer.instances[Class.name]) {
-      DIContainer.instances[Class.name] = {};
+    if (!DIContainer.instances[Original.name]) {
+      DIContainer.instances[Original.name] = {};
     }
 
-    if (!DIContainer.instances[Class.name][propertyKey]) {
-      const ResolvedClass = DIContainer.getClass(Class);
+    if (!DIContainer.instances[Original.name][propertyKey]) {
+      const Class = DIContainer.getClass(Original);
+      const instance = new Class(...props);
 
-      DIContainer.instances[Class.name][propertyKey] = new ResolvedClass(
-        ...props
-      );
+      DIContainer.instances[Original.name][propertyKey] = instance;
     }
 
-    return DIContainer.instances[Class.name][propertyKey] as T;
+    return DIContainer.instances[Original.name][propertyKey] as T;
   }
 
   /**
-   * get the Class/Override that was used with bind
-   * @param Class the class to search for in DIContainer
-   * @returns {class}
-   */
-  static getClass<T extends BaseObject>(Class: BaseClass<T>): BaseClass<T> {
-    const overwrite = this.overrides[Class.name];
-
-    return (overwrite || Class) as BaseClass<T>;
-  }
-
-  /**
-   * the api to free class instances to prevent possible oom
+   * the api to free class instances to prevent eventual oom
    * @param Class the class to search for in DIContainer
    */
-  static free<T extends BaseObject>(Class: BaseClass<T>) {
+  static freeInstances<T extends BaseObject>(Class: BaseClass<T>) {
     DIContainer.instances[Class.name] = {};
   }
 
