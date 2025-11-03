@@ -3,72 +3,40 @@
 [<img src="https://img.shields.io/npm/v/inject.min?style=for-the-badge&color=success" alt="npm version" />](https://www.npmjs.com/package/inject.min?activeTab=versions)
 [<img src="https://img.shields.io/circleci/build/github/Jackie-Aniki/inject.min/main?style=for-the-badge" alt="build status" />](https://app.circleci.com/pipelines/github/Jackie-Aniki/inject.min)
 
-### disclaimer
+### Installation
 
-super easy and super small dependency injection - all that you need
-
-- no need to register
-- can override
-- can use inject
-- can use decorators
-
-#### the problem
-
-1. you have a tree of objects
-2. one day you decide to have a similarly constructed component
-3. but the problem is at some branch/leaf you want a different class
-4. the rest is the same
-
-#### solution
-
-1. in the branch/leaf use `DIContainer.getClass(Slot)` to get class of `Slot`
-2. in the cloned component use `DIContainer.setClass(Slot, NewComponent)`
-
-#### result
-
-1. in original component that resolves to `Slot`
-2. in cloned component that resolves to `NewComponent`
-
-### example without decorators
-
-```ts
-import { DIContainer } from 'inject.min';
-
-class Original {
-  name = 'original';
-}
-
-class Override extends Original {
-  name = 'override';
-}
-
-class TestGet {
-  constructor() {
-    const Class = DIContainer.getClass(Original);
-    const instance = new Class();
-
-    console.log(Class.name, instance.name);
-  }
-}
-
-class TestOverride extends TestGet {
-  constructor() {
-    DIContainer.setClass(Original, Override);
-
-    super();
-  }
-}
-
-// 'Original', 'original'
-new TestGet();
-
-// 'Override', 'override'
-new TestOverride();
+```bash
+yarn add inject.min
 ```
 
-### using with decorators (optional step)
+### Usage
 
-modify your `tsconfig.json`
+```ts
+import { Inject } from 'inject.min';
+
+class Example {
+  // your content
+}
+
+class Class {
+  @Inject(Example) prop!: Example;
+
+  constructor() {
+    // exists
+    console.log(this.prop);
+  }
+}
+
+const class1 = new Class();
+const class2 = new Class();
+
+// true
+console.log(class1.prop === class2.prop);
+```
+
+### tsconfig.json
+
+you need to have `compiler option` `experimental decorators` `enabled` in `tsconfig.json`
 
 ```json
 {
@@ -78,70 +46,10 @@ modify your `tsconfig.json`
 }
 ```
 
-### example using decorators
-
-```ts
-import { Inject } from 'inject.min';
-
-class Example {
-  value: string;
-
-  constructor(props?: { param: string }) {
-    this.value = props?.param || 'example';
-  }
-}
-
-class Example2 extends Example {
-  constructor(param: string) {
-    super({ param });
-  }
-}
-
-class Test {
-  @Inject(Example) example: Example;
-  @Inject(Example2, 'example2') example2: Example2;
-  @Inject(Example, { param: 'example3' }) example3: Example;
-
-  constructor() {
-    console.log(this.example.value); // example
-    console.log(this.example2.value); // example2
-    console.log(this.example3.value); // example3
-  }
-}
-
-class Test2 {
-  @Inject(Example) example: Example;
-  @Inject(Example2, 'different') example2: Example2;
-  @Inject(Example, { param: 'example3' }) example3: Example;
-
-  constructor() {
-    console.log(this.example.value); // example
-    console.log(this.example2.value); // different
-    console.log(this.example3.value); // example3
-  }
-}
-
-class Test3 extends Test {}
-
-const test = new Test(); // example, example2, example3
-const test2 = new Test2(); // example, different, example3
-const test3 = new Test3(); // example, example2, example3
-
-console.log(test.example === test2.example); // true
-console.log(test.example2 === test2.example2); // false
-console.log(test.example2 === test3.example2); // true
-```
-
-### api
+### API
 
 [DIContainer Documentation](https://Jackie-Aniki.github.io/inject.min/classes/DIContainer.html)
 
-### install
-
-```bash
-npm i inject.min --save
-```
-
-### license
+### License
 
 MIT

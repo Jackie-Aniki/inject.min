@@ -1,6 +1,6 @@
 {
   "name": "inject.min",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "super easy and super small dependency injection - all that you need | no need to register | can override | can use inject | can use decorators",
   "keywords": [
     "typescript",
@@ -58,7 +58,6 @@
     "amend": "yarn precommit && git commit -a --am --no-edit"
   },
   "files": [
-    "src/*.*",
     "dist/*.*"
   ]
 }

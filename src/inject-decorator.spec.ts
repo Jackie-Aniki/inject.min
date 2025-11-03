@@ -1,4 +1,4 @@
-import { DIContainer, Inject } from '../src';
+import { DIContainer, Inject } from '..';
 
 class Example1 {
   value!: string;
@@ -22,7 +22,7 @@ class Override extends Original {
   name = 'override';
 }
 
-export class Test1 {
+class Test1 {
   @Inject(Example1) example1!: Example1;
   @Inject(Example2, 'example2') example2!: Example2;
   @Inject(Example1, { param: 'example3' }) example3!: Example1;
@@ -36,7 +36,7 @@ export class Test1 {
   }
 }
 
-export class Test2 {
+class Test2 {
   @Inject(Example1) example1!: Example1;
   @Inject(Example2, 'different') example2!: Example2;
   @Inject(Example1, { param: 'example3' }) example3!: Example1;
@@ -50,9 +50,9 @@ export class Test2 {
   }
 }
 
-export class Test3 extends Test1 {}
+class Test3 extends Test1 {}
 
-export class TestOverride {
+class TestOverride {
   @Inject(Original) test!: Original;
 
   output: any[] = [];
@@ -67,3 +67,28 @@ export class TestOverride {
     this.output.push(Class === Override); // true
   }
 }
+
+describe('GIVEN @Inject decorator', () => {
+  it('THEN @Inject() and DIContainer.setClass(Original, Override) work', () => {
+    const { output: test1 } = new Test1();
+    const { output: test2 } = new Test2();
+    const { output: test3 } = new Test3();
+    const { output: testOverride } = new TestOverride();
+
+    const tests = {
+      test1,
+      test2,
+      test3,
+      testOverride
+    };
+
+    const expectedResults = {
+      test1: ['example1', 'example2', 'example3'],
+      test2: ['example1', 'different', 'example3'],
+      test3: ['example1', 'example2', 'example3'],
+      testOverride: ['override', true]
+    };
+
+    expect(tests).toStrictEqual(expectedResults);
+  });
+});

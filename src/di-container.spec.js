@@ -1,6 +1,6 @@
-const { DIContainer } = require('../dist');
-
 describe('GIVEN DIContainer', () => {
+  const { DIContainer } = require('..');
+
   it('THEN getInstance(Class) does work', () => {
     class GetExample {
       value = {

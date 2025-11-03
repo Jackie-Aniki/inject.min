@@ -53,3 +53,4 @@ export declare class DIContainer {
    */
   protected static tryStringify(props?: any): string;
 }
+//# sourceMappingURL=di-container.d.ts.map

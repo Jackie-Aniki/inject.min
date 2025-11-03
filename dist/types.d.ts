@@ -4,3 +4,4 @@ export type BaseObject = {
   };
 };
 export type BaseClass<T = BaseObject> = new (...args: any[]) => T;
+//# sourceMappingURL=types.d.ts.map
