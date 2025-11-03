@@ -41,6 +41,14 @@ class DIContainer {
    * the api to free class instances to prevent eventual oom
    * @param Class the class to search for in DIContainer
    */
+  static freeInstance(Class, props) {
+    const propertyKey = DIContainer.createPropertyKey(props);
+    delete DIContainer.instances[Class.name][propertyKey];
+  }
+  /**
+   * the api to free class instances to prevent eventual oom
+   * @param Class the class to search for in DIContainer
+   */
   static freeInstances(Class) {
     DIContainer.instances[Class.name] = {};
   }

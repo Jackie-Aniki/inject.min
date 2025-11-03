@@ -2,4 +2,9 @@ import { BaseClass, BaseObject } from './types';
 export declare function Inject<T extends BaseObject>(
   Class: BaseClass<T>,
   props?: any
-): (target: any, propertyKey: any) => void;
+): (
+  target: any,
+  propertyKey: any
+) => typeof target & {
+  [propertyKey]: BaseClass<T>;
+};

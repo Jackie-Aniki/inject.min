@@ -1,6 +1,6 @@
 {
   "name": "inject.min",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "super easy and super small dependency injection - all that you need | no need to register | can override | can use inject | can use decorators",
   "keywords": [
     "typescript",
@@ -30,23 +30,31 @@
   "private": false,
   "dependencies": {},
   "devDependencies": {
-    "@types/jest": "^30.0.0",
+    "@babel/core": "^7.28.5",
+    "@babel/plugin-proposal-decorators": "^7.28.0",
+    "@babel/plugin-transform-class-properties": "^7.27.1",
+    "@babel/plugin-transform-modules-commonjs": "^7.27.1",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "@types/jest": "^30",
+    "babel-jest": "^30.2.0",
     "chef-express": "^3.2.3",
     "jest": "^30.2.0",
     "prettier": "^3.6.2",
-    "ts-node": "^10.9.2",
+    "rimraf": "^6.1.0",
     "typedoc": "^0.28.14",
     "typescript": "^5.9.3"
   },
   "scripts": {
     "format": "prettier . --write",
-    "prebuild": "rm -rf dist",
+    "prebuild": "rimraf dist",
     "build": "tsc",
-    "postbuild": "yarn typedoc",
-    "docs": "yarn build && chef-express docs --port 3000",
+    "start": "chef-express docs",
+    "docs": "yarn typedoc",
+    "dev": "yarn build && yarn docs && yarn start",
+    "pretest": "yarn build",
     "test": "yarn jest --verbose",
-    "test-ts": "ts-node tests/with-decorators.ts",
-    "precommit": "yarn build && yarn format",
+    "precommit": "yarn test && yarn format && yarn docs",
     "amend": "yarn precommit && git commit -a --am --no-edit"
   },
   "files": [

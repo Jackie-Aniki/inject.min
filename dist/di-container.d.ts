@@ -1,7 +1,7 @@
 import { BaseClass, BaseObject } from './types';
 export declare class DIContainer {
-  protected static overrides: Record<string, BaseClass>;
-  protected static instances: Record<string, Record<string, BaseObject>>;
+  static readonly overrides: Record<string, BaseClass>;
+  static readonly instances: Record<string, Record<string, BaseObject>>;
   /**
    * get the Class/Override that was used with setClass
    * @param Original the class to search for in DIContainer
@@ -27,6 +27,14 @@ export declare class DIContainer {
     Original: BaseClass<T>,
     ...props: any[]
   ): T;
+  /**
+   * the api to free class instances to prevent eventual oom
+   * @param Class the class to search for in DIContainer
+   */
+  static freeInstance<T extends BaseObject>(
+    Class: BaseClass<T>,
+    props?: any
+  ): void;
   /**
    * the api to free class instances to prevent eventual oom
    * @param Class the class to search for in DIContainer

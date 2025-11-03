@@ -1,29 +1,26 @@
-const { spawnSync } = require('child_process');
-
 describe('GIVEN @Inject decorator', () => {
   it('THEN @Inject() and DIContainer.setClass(Original, Override) work', () => {
-    const {
-      output: [, lines]
-    } = spawnSync('ts-node', ['tests/with-decorators.ts'], {
-      encoding: 'utf-8'
-    });
+    const { Test1, Test2, Test3, TestOverride } = require('./with-decorators');
 
-    const result = JSON.parse(
-      JSON.stringify(lines.split('\n').filter(Boolean))
-    );
+    const { output: test1 } = new Test1();
+    const { output: test2 } = new Test2();
+    const { output: test3 } = new Test3();
+    const { output: testOverride } = new TestOverride();
 
-    expect(result).toStrictEqual([
-      'example',
-      'example2',
-      'example3',
-      'example',
-      'different',
-      'example3',
-      'example',
-      'example2',
-      'example3',
-      'override',
-      'true'
-    ]);
+    const tests = {
+      test1,
+      test2,
+      test3,
+      testOverride
+    };
+
+    const expectedResults = {
+      test1: ['example1', 'example2', 'example3'],
+      test2: ['example1', 'different', 'example3'],
+      test3: ['example1', 'example2', 'example3'],
+      testOverride: ['override', true]
+    };
+
+    expect(tests).toStrictEqual(expectedResults);
   });
 });
