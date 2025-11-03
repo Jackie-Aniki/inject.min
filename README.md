@@ -1,7 +1,7 @@
 # inject.min
 
 [<img src="https://img.shields.io/npm/v/inject.min?style=for-the-badge&color=success" alt="npm version" />](https://www.npmjs.com/package/inject.min?activeTab=versions)
-[<img src="https://img.shields.io/circleci/build/github/Prozi/inject.min/main?style=for-the-badge" alt="build status" />](https://app.circleci.com/pipelines/github/Prozi/inject.min)
+[<img src="https://img.shields.io/circleci/build/github/Jackie-Aniki/inject.min/main?style=for-the-badge" alt="build status" />](https://app.circleci.com/pipelines/github/Jackie-Aniki/inject.min)
 
 ### disclaimer
 
@@ -134,7 +134,7 @@ console.log(test.example2 === test3.example2); // true
 
 ### api
 
-[DIContainer Documentation](https://prozi.github.io/inject.min/classes/DIContainer.html)
+[DIContainer Documentation](https://Jackie-Aniki.github.io/inject.min/classes/DIContainer.html)
 
 ### install
 

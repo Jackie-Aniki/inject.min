@@ -36,36 +36,37 @@ window.translations = {
 };
 ('use strict');
 (() => {
-  var Je = Object.create;
+  var Ke = Object.create;
   var he = Object.defineProperty;
-  var Ke = Object.getOwnPropertyDescriptor;
-  var Ge = Object.getOwnPropertyNames;
+  var Ge = Object.getOwnPropertyDescriptor;
+  var Ze = Object.getOwnPropertyNames;
   var Xe = Object.getPrototypeOf,
     Ye = Object.prototype.hasOwnProperty;
-  var Ze = (t, e) => () => (
-    e || t((e = { exports: {} }).exports, e), e.exports
+  var et = (t, e) => () => (
+    e || t((e = { exports: {} }).exports, e),
+    e.exports
   );
-  var et = (t, e, n, r) => {
+  var tt = (t, e, n, r) => {
     if ((e && typeof e == 'object') || typeof e == 'function')
-      for (let i of Ge(e))
+      for (let i of Ze(e))
         !Ye.call(t, i) &&
           i !== n &&
           he(t, i, {
             get: () => e[i],
-            enumerable: !(r = Ke(e, i)) || r.enumerable
+            enumerable: !(r = Ge(e, i)) || r.enumerable
           });
     return t;
   };
-  var tt = (t, e, n) => (
-    (n = t != null ? Je(Xe(t)) : {}),
-    et(
+  var nt = (t, e, n) => (
+    (n = t != null ? Ke(Xe(t)) : {}),
+    tt(
       e || !t || !t.__esModule
         ? he(n, 'default', { value: t, enumerable: !0 })
         : n,
       t
     )
   );
-  var ye = Ze((me, ge) => {
+  var ye = et((me, ge) => {
     (function () {
       var t = function (e) {
         var n = new t.Builder();
@@ -77,7 +78,7 @@ window.translations = {
         );
       };
       t.version = '2.3.9';
-      (t.utils = {}),
+      ((t.utils = {}),
         (t.utils.warn = (function (e) {
           return function (n) {
             e.console && console.warn && console.warn(n);
@@ -114,7 +115,7 @@ window.translations = {
           return n;
         }),
         (t.FieldRef = function (e, n, r) {
-          (this.docRef = e), (this.fieldName = n), (this._stringValue = r);
+          ((this.docRef = e), (this.fieldName = n), (this._stringValue = r));
         }),
         (t.FieldRef.joiner = '/'),
         (t.FieldRef.fromString = function (e) {
@@ -131,8 +132,8 @@ window.translations = {
                 this.fieldName + t.FieldRef.joiner + this.docRef),
             this._stringValue
           );
-        });
-      (t.Set = function (e) {
+        }));
+      ((t.Set = function (e) {
         if (((this.elements = Object.create(null)), e)) {
           this.length = e.length;
           for (var n = 0; n < this.length; n++) this.elements[e[n]] = !0;
@@ -170,10 +171,10 @@ window.translations = {
             s = [];
           if (e === t.Set.complete) return this;
           if (e === t.Set.empty) return e;
-          this.length < e.length
+          (this.length < e.length
             ? ((n = this), (r = e))
             : ((n = e), (r = this)),
-            (i = Object.keys(n.elements));
+            (i = Object.keys(n.elements)));
           for (var o = 0; o < i.length; o++) {
             var a = i[o];
             a in r.elements && s.push(a);
@@ -196,13 +197,13 @@ window.translations = {
           return Math.log(1 + Math.abs(s));
         }),
         (t.Token = function (e, n) {
-          (this.str = e || ''), (this.metadata = n || {});
+          ((this.str = e || ''), (this.metadata = n || {}));
         }),
         (t.Token.prototype.toString = function () {
           return this.str;
         }),
         (t.Token.prototype.update = function (e) {
-          return (this.str = e(this.str, this.metadata)), this;
+          return ((this.str = e(this.str, this.metadata)), this);
         }),
         (t.Token.prototype.clone = function (e) {
           return (
@@ -213,8 +214,8 @@ window.translations = {
               }),
             new t.Token(e(this.str, this.metadata), this.metadata)
           );
-        });
-      (t.tokenizer = function (e, n) {
+        }));
+      ((t.tokenizer = function (e, n) {
         if (e == null || e == null) return [];
         if (Array.isArray(e))
           return e.map(function (f) {
@@ -237,25 +238,25 @@ window.translations = {
           if (c.match(t.tokenizer.separator) || o == i) {
             if (l > 0) {
               var d = t.utils.clone(n) || {};
-              (d.position = [a, l]),
+              ((d.position = [a, l]),
                 (d.index = s.length),
-                s.push(new t.Token(r.slice(a, o), d));
+                s.push(new t.Token(r.slice(a, o), d)));
             }
             a = o + 1;
           }
         }
         return s;
       }),
-        (t.tokenizer.separator = /[\s\-]+/);
-      (t.Pipeline = function () {
+        (t.tokenizer.separator = /[\s\-]+/));
+      ((t.Pipeline = function () {
         this._stack = [];
       }),
         (t.Pipeline.registeredFunctions = Object.create(null)),
         (t.Pipeline.registerFunction = function (e, n) {
-          n in this.registeredFunctions &&
+          (n in this.registeredFunctions &&
             t.utils.warn('Overwriting existing registered function: ' + n),
             (e.label = n),
-            (t.Pipeline.registeredFunctions[e.label] = e);
+            (t.Pipeline.registeredFunctions[e.label] = e));
         }),
         (t.Pipeline.warnIfFunctionNotRegistered = function (e) {
           var n = e.label && e.label in this.registeredFunctions;
@@ -280,14 +281,14 @@ window.translations = {
         (t.Pipeline.prototype.add = function () {
           var e = Array.prototype.slice.call(arguments);
           e.forEach(function (n) {
-            t.Pipeline.warnIfFunctionNotRegistered(n), this._stack.push(n);
+            (t.Pipeline.warnIfFunctionNotRegistered(n), this._stack.push(n));
           }, this);
         }),
         (t.Pipeline.prototype.after = function (e, n) {
           t.Pipeline.warnIfFunctionNotRegistered(n);
           var r = this._stack.indexOf(e);
           if (r == -1) throw new Error('Cannot find existingFn');
-          (r = r + 1), this._stack.splice(r, 0, n);
+          ((r = r + 1), this._stack.splice(r, 0, n));
         }),
         (t.Pipeline.prototype.before = function (e, n) {
           t.Pipeline.warnIfFunctionNotRegistered(n);
@@ -323,11 +324,11 @@ window.translations = {
         }),
         (t.Pipeline.prototype.toJSON = function () {
           return this._stack.map(function (e) {
-            return t.Pipeline.warnIfFunctionNotRegistered(e), e.label;
+            return (t.Pipeline.warnIfFunctionNotRegistered(e), e.label);
           });
-        });
-      (t.Vector = function (e) {
-        (this._magnitude = 0), (this.elements = e || []);
+        }));
+      ((t.Vector = function (e) {
+        ((this._magnitude = 0), (this.elements = e || []));
       }),
         (t.Vector.prototype.positionForIndex = function (e) {
           if (this.elements.length == 0) return 0;
@@ -340,9 +341,9 @@ window.translations = {
             i > 1 && (o < e && (n = s), o > e && (r = s), o != e);
 
           )
-            (i = r - n),
+            ((i = r - n),
               (s = n + Math.floor(i / 2)),
-              (o = this.elements[s * 2]);
+              (o = this.elements[s * 2]));
           if (o == e || o > e) return s * 2;
           if (o < e) return (s + 1) * 2;
         }),
@@ -380,13 +381,13 @@ window.translations = {
             l < s && d < o;
 
           )
-            (a = r[l]),
+            ((a = r[l]),
               (c = i[d]),
               a < c
                 ? (l += 2)
                 : a > c
                   ? (d += 2)
-                  : a == c && ((n += r[l + 1] * i[d + 1]), (l += 2), (d += 2));
+                  : a == c && ((n += r[l + 1] * i[d + 1]), (l += 2), (d += 2)));
           return n;
         }),
         (t.Vector.prototype.similarity = function (e) {
@@ -403,8 +404,8 @@ window.translations = {
         }),
         (t.Vector.prototype.toJSON = function () {
           return this.elements;
-        });
-      (t.stemmer = (function () {
+        }));
+      ((t.stemmer = (function () {
         var e = {
             ational: 'ate',
             tional: 'tion',
@@ -455,7 +456,7 @@ window.translations = {
           T = /^(.+?)(ed|ing)$/,
           L = /.$/,
           C = /(at|bl|iz)$/,
-          M = new RegExp('([^aeiouylsz])\\1$'),
+          O = new RegExp('([^aeiouylsz])\\1$'),
           j = new RegExp('^' + s + i + '[^aeiouwxy]$'),
           N = /^(.+?[^aeiou])y$/,
           q =
@@ -483,48 +484,48 @@ window.translations = {
               h.test(u))
             ) {
               var b = h.exec(u);
-              (h = f), h.test(b[1]) && ((h = L), (u = u.replace(h, '')));
+              ((h = f), h.test(b[1]) && ((h = L), (u = u.replace(h, ''))));
             } else if (E.test(u)) {
               var b = E.exec(u);
-              (y = b[1]),
+              ((y = b[1]),
                 (E = x),
                 E.test(y) &&
                   ((u = y),
                   (E = C),
-                  (Q = M),
+                  (Q = O),
                   (H = j),
                   E.test(u)
                     ? (u = u + 'e')
                     : Q.test(u)
                       ? ((h = L), (u = u.replace(h, '')))
-                      : H.test(u) && (u = u + 'e'));
+                      : H.test(u) && (u = u + 'e')));
             }
             if (((h = N), h.test(u))) {
               var b = h.exec(u);
-              (y = b[1]), (u = y + 'i');
+              ((y = b[1]), (u = y + 'i'));
             }
             if (((h = q), h.test(u))) {
               var b = h.exec(u);
-              (y = b[1]), (P = b[2]), (h = f), h.test(y) && (u = y + e[P]);
+              ((y = b[1]), (P = b[2]), (h = f), h.test(y) && (u = y + e[P]));
             }
             if (((h = W), h.test(u))) {
               var b = h.exec(u);
-              (y = b[1]), (P = b[2]), (h = f), h.test(y) && (u = y + n[P]);
+              ((y = b[1]), (P = b[2]), (h = f), h.test(y) && (u = y + n[P]));
             }
             if (((h = B), (E = z), h.test(u))) {
               var b = h.exec(u);
-              (y = b[1]), (h = p), h.test(y) && (u = y);
+              ((y = b[1]), (h = p), h.test(y) && (u = y));
             } else if (E.test(u)) {
               var b = E.exec(u);
-              (y = b[1] + b[2]), (E = p), E.test(y) && (u = y);
+              ((y = b[1] + b[2]), (E = p), E.test(y) && (u = y));
             }
             if (((h = _), h.test(u))) {
               var b = h.exec(u);
-              (y = b[1]),
+              ((y = b[1]),
                 (h = p),
                 (E = v),
                 (Q = J),
-                (h.test(y) || (E.test(y) && !Q.test(y))) && (u = y);
+                (h.test(y) || (E.test(y) && !Q.test(y))) && (u = y));
             }
             return (
               (h = U),
@@ -538,10 +539,10 @@ window.translations = {
           return A.update(V);
         };
       })()),
-        t.Pipeline.registerFunction(t.stemmer, 'stemmer');
-      (t.generateStopWordFilter = function (e) {
+        t.Pipeline.registerFunction(t.stemmer, 'stemmer'));
+      ((t.generateStopWordFilter = function (e) {
         var n = e.reduce(function (r, i) {
-          return (r[i] = i), r;
+          return ((r[i] = i), r);
         }, {});
         return function (r) {
           if (r && n[r.toString()] !== r.toString()) return r;
@@ -668,18 +669,18 @@ window.translations = {
           'you',
           'your'
         ])),
-        t.Pipeline.registerFunction(t.stopWordFilter, 'stopWordFilter');
-      (t.trimmer = function (e) {
+        t.Pipeline.registerFunction(t.stopWordFilter, 'stopWordFilter'));
+      ((t.trimmer = function (e) {
         return e.update(function (n) {
           return n.replace(/^\W+/, '').replace(/\W+$/, '');
         });
       }),
-        t.Pipeline.registerFunction(t.trimmer, 'trimmer');
-      (t.TokenSet = function () {
-        (this.final = !1),
+        t.Pipeline.registerFunction(t.trimmer, 'trimmer'));
+      ((t.TokenSet = function () {
+        ((this.final = !1),
           (this.edges = {}),
           (this.id = t.TokenSet._nextId),
-          (t.TokenSet._nextId += 1);
+          (t.TokenSet._nextId += 1));
       }),
         (t.TokenSet._nextId = 1),
         (t.TokenSet.fromArray = function (e) {
@@ -689,7 +690,7 @@ window.translations = {
             r++
           )
             n.insert(e[r]);
-          return n.finish(), n.root;
+          return (n.finish(), n.root);
         }),
         (t.TokenSet.fromClause = function (e) {
           return 'editDistance' in e
@@ -707,7 +708,7 @@ window.translations = {
             if (s.str.length > 0) {
               var o = s.str.charAt(0),
                 a;
-              o in s.node.edges
+              (o in s.node.edges
                 ? (a = s.node.edges[o])
                 : ((a = new t.TokenSet()), (s.node.edges[o] = a)),
                 s.str.length == 1 && (a.final = !0),
@@ -715,7 +716,7 @@ window.translations = {
                   node: a,
                   editsRemaining: s.editsRemaining,
                   str: s.str.slice(1)
-                });
+                }));
             }
             if (s.editsRemaining != 0) {
               if ('*' in s.node.edges) var c = s.node.edges['*'];
@@ -744,18 +745,18 @@ window.translations = {
                   var l = new t.TokenSet();
                   s.node.edges['*'] = l;
                 }
-                s.str.length == 1 && (l.final = !0),
+                (s.str.length == 1 && (l.final = !0),
                   i.push({
                     node: l,
                     editsRemaining: s.editsRemaining - 1,
                     str: s.str.slice(1)
-                  });
+                  }));
               }
               if (s.str.length > 1) {
                 var d = s.str.charAt(0),
                   f = s.str.charAt(1),
                   p;
-                f in s.node.edges
+                (f in s.node.edges
                   ? (p = s.node.edges[f])
                   : ((p = new t.TokenSet()), (s.node.edges[f] = p)),
                   s.str.length == 1 && (p.final = !0),
@@ -763,7 +764,7 @@ window.translations = {
                     node: p,
                     editsRemaining: s.editsRemaining - 1,
                     str: d + s.str.slice(2)
-                  });
+                  }));
               }
             }
           }
@@ -777,10 +778,10 @@ window.translations = {
           ) {
             var o = e[i],
               a = i == s - 1;
-            if (o == '*') (n.edges[o] = n), (n.final = a);
+            if (o == '*') ((n.edges[o] = n), (n.final = a));
             else {
               var c = new t.TokenSet();
-              (c.final = a), (n.edges[o] = c), (n = c);
+              ((c.final = a), (n.edges[o] = c), (n = c));
             }
           }
           return r;
@@ -839,22 +840,22 @@ window.translations = {
                     x = r.qNode.edges[d],
                     w = v.final && x.final,
                     m = void 0;
-                  p in r.output.edges
+                  (p in r.output.edges
                     ? ((m = r.output.edges[p]), (m.final = m.final || w))
                     : ((m = new t.TokenSet()),
                       (m.final = w),
                       (r.output.edges[p] = m)),
-                    i.push({ qNode: x, output: m, node: v });
+                    i.push({ qNode: x, output: m, node: v }));
                 }
               }
           }
           return n;
         }),
         (t.TokenSet.Builder = function () {
-          (this.previousWord = ''),
+          ((this.previousWord = ''),
             (this.root = new t.TokenSet()),
             (this.uncheckedNodes = []),
-            (this.minimizedNodes = {});
+            (this.minimizedNodes = {}));
         }),
         (t.TokenSet.Builder.prototype.insert = function (e) {
           var n,
@@ -869,18 +870,19 @@ window.translations = {
             i++
           )
             r++;
-          this.minimize(r),
+          (this.minimize(r),
             this.uncheckedNodes.length == 0
               ? (n = this.root)
-              : (n = this.uncheckedNodes[this.uncheckedNodes.length - 1].child);
+              : (n =
+                  this.uncheckedNodes[this.uncheckedNodes.length - 1].child));
           for (var i = r; i < e.length; i++) {
             var s = new t.TokenSet(),
               o = e[i];
-            (n.edges[o] = s),
+            ((n.edges[o] = s),
               this.uncheckedNodes.push({ parent: n, char: o, child: s }),
-              (n = s);
+              (n = s));
           }
-          (n.final = !0), (this.previousWord = e);
+          ((n.final = !0), (this.previousWord = e));
         }),
         (t.TokenSet.Builder.prototype.finish = function () {
           this.minimize(0);
@@ -889,18 +891,18 @@ window.translations = {
           for (var n = this.uncheckedNodes.length - 1; n >= e; n--) {
             var r = this.uncheckedNodes[n],
               i = r.child.toString();
-            i in this.minimizedNodes
+            (i in this.minimizedNodes
               ? (r.parent.edges[r.char] = this.minimizedNodes[i])
               : ((r.child._str = i), (this.minimizedNodes[i] = r.child)),
-              this.uncheckedNodes.pop();
+              this.uncheckedNodes.pop());
           }
-        });
-      (t.Index = function (e) {
-        (this.invertedIndex = e.invertedIndex),
+        }));
+      ((t.Index = function (e) {
+        ((this.invertedIndex = e.invertedIndex),
           (this.fieldVectors = e.fieldVectors),
           (this.tokenSet = e.tokenSet),
           (this.fields = e.fields),
-          (this.pipeline = e.pipeline);
+          (this.pipeline = e.pipeline));
       }),
         (t.Index.prototype.search = function (e) {
           return this.query(function (n) {
@@ -943,7 +945,7 @@ window.translations = {
               }
               for (var T = 0; T < w.length; T++)
                 for (
-                  var L = w[T], C = this.invertedIndex[L], M = C._index, m = 0;
+                  var L = w[T], C = this.invertedIndex[L], O = C._index, m = 0;
                   m < l.fields.length;
                   m++
                 ) {
@@ -958,13 +960,13 @@ window.translations = {
                       o[g] === void 0 && (o[g] = t.Set.complete)),
                     l.presence == t.Query.presence.PROHIBITED)
                   ) {
-                    a[g] === void 0 && (a[g] = t.Set.empty),
-                      (a[g] = a[g].union(W));
+                    (a[g] === void 0 && (a[g] = t.Set.empty),
+                      (a[g] = a[g].union(W)));
                     continue;
                   }
                   if (
-                    (i[g].upsert(M, l.boost, function (ze, Ue) {
-                      return ze + Ue;
+                    (i[g].upsert(O, l.boost, function (Ue, Je) {
+                      return Ue + Je;
                     }),
                     !s[q])
                   ) {
@@ -993,7 +995,7 @@ window.translations = {
             c++
           ) {
             var g = this.fields[c];
-            o[g] && (V = V.intersect(o[g])), a[g] && (A = A.union(a[g]));
+            (o[g] && (V = V.intersect(o[g])), a[g] && (A = A.union(a[g])));
           }
           var u = Object.keys(r),
             y = [],
@@ -1014,15 +1016,15 @@ window.translations = {
                 Q = i[k.fieldName].similarity(E),
                 H;
               if ((H = P[h]) !== void 0)
-                (H.score += Q), H.matchData.combine(r[k]);
+                ((H.score += Q), H.matchData.combine(r[k]));
               else {
                 var b = { ref: h, score: Q, matchData: r[k] };
-                (P[h] = b), y.push(b);
+                ((P[h] = b), y.push(b));
               }
             }
           }
-          return y.sort(function (qe, We) {
-            return We.score - qe.score;
+          return y.sort(function (We, ze) {
+            return ze.score - We.score;
           });
         }),
         (t.Index.prototype.toJSON = function () {
@@ -1068,7 +1070,7 @@ window.translations = {
             var d = o[l],
               v = d[0],
               x = d[1];
-            a.insert(v), (s[v] = x);
+            (a.insert(v), (s[v] = x));
           }
           return (
             a.finish(),
@@ -1079,9 +1081,9 @@ window.translations = {
             (n.pipeline = c),
             new t.Index(n)
           );
-        });
-      (t.Builder = function () {
-        (this._ref = 'id'),
+        }));
+      ((t.Builder = function () {
+        ((this._ref = 'id'),
           (this._fields = Object.create(null)),
           (this._documents = Object.create(null)),
           (this.invertedIndex = Object.create(null)),
@@ -1094,7 +1096,7 @@ window.translations = {
           (this._b = 0.75),
           (this._k1 = 1.2),
           (this.termIndex = 0),
-          (this.metadataWhitelist = []);
+          (this.metadataWhitelist = []));
       }),
         (t.Builder.prototype.ref = function (e) {
           this._ref = e;
@@ -1115,7 +1117,7 @@ window.translations = {
         (t.Builder.prototype.add = function (e, n) {
           var r = e[this._ref],
             i = Object.keys(this._fields);
-          (this._documents[r] = n || {}), (this.documentCount += 1);
+          ((this._documents[r] = n || {}), (this.documentCount += 1));
           for (var s = 0; s < i.length; s++) {
             var o = i[s],
               a = this._fields[o].extractor,
@@ -1124,9 +1126,9 @@ window.translations = {
               d = this.pipeline.run(l),
               f = new t.FieldRef(r, o),
               p = Object.create(null);
-            (this.fieldTermFrequencies[f] = p),
+            ((this.fieldTermFrequencies[f] = p),
               (this.fieldLengths[f] = 0),
-              (this.fieldLengths[f] += d.length);
+              (this.fieldLengths[f] += d.length));
             for (var v = 0; v < d.length; v++) {
               var x = d[v];
               if (
@@ -1135,7 +1137,7 @@ window.translations = {
                 this.invertedIndex[x] == null)
               ) {
                 var w = Object.create(null);
-                (w._index = this.termIndex), (this.termIndex += 1);
+                ((w._index = this.termIndex), (this.termIndex += 1));
                 for (var m = 0; m < i.length; m++)
                   w[i[m]] = Object.create(null);
                 this.invertedIndex[x] = w;
@@ -1145,9 +1147,9 @@ window.translations = {
               for (var g = 0; g < this.metadataWhitelist.length; g++) {
                 var T = this.metadataWhitelist[g],
                   L = x.metadata[T];
-                this.invertedIndex[x][o][r][T] == null &&
+                (this.invertedIndex[x][o][r][T] == null &&
                   (this.invertedIndex[x][o][r][T] = []),
-                  this.invertedIndex[x][o][r][T].push(L);
+                  this.invertedIndex[x][o][r][T].push(L));
               }
             }
           }
@@ -1164,10 +1166,10 @@ window.translations = {
           ) {
             var o = t.FieldRef.fromString(e[s]),
               a = o.fieldName;
-            i[a] || (i[a] = 0),
+            (i[a] || (i[a] = 0),
               (i[a] += 1),
               r[a] || (r[a] = 0),
-              (r[a] += this.fieldLengths[o]);
+              (r[a] += this.fieldLengths[o]));
           }
           for (var c = Object.keys(this._fields), s = 0; s < c.length; s++) {
             var l = c[s];
@@ -1204,8 +1206,8 @@ window.translations = {
                 T = this.invertedIndex[m]._index,
                 L,
                 C,
-                M;
-              i[m] === void 0
+                O;
+              (i[m] === void 0
                 ? ((L = t.idf(this.invertedIndex[m], this.documentCount)),
                   (i[m] = L))
                 : (L = i[m]),
@@ -1216,8 +1218,8 @@ window.translations = {
                     g)),
                 (C *= v),
                 (C *= x),
-                (M = Math.round(C * 1e3) / 1e3),
-                l.insert(T, M);
+                (O = Math.round(C * 1e3) / 1e3),
+                l.insert(T, O));
             }
             e[o] = l;
           }
@@ -1244,7 +1246,7 @@ window.translations = {
         }),
         (t.Builder.prototype.use = function (e) {
           var n = Array.prototype.slice.call(arguments, 1);
-          n.unshift(this), e.apply(this, n);
+          (n.unshift(this), e.apply(this, n));
         }),
         (t.MatchData = function (e, n, r) {
           for (
@@ -1255,10 +1257,10 @@ window.translations = {
             var a = s[o];
             i[a] = r[a].slice();
           }
-          (this.metadata = Object.create(null)),
+          ((this.metadata = Object.create(null)),
             e !== void 0 &&
               ((this.metadata[e] = Object.create(null)),
-              (this.metadata[e][n] = i));
+              (this.metadata[e][n] = i)));
         }),
         (t.MatchData.prototype.combine = function (e) {
           for (var n = Object.keys(e.metadata), r = 0; r < n.length; r++) {
@@ -1284,7 +1286,8 @@ window.translations = {
         }),
         (t.MatchData.prototype.add = function (e, n, r) {
           if (!(e in this.metadata)) {
-            (this.metadata[e] = Object.create(null)), (this.metadata[e][n] = r);
+            ((this.metadata[e] = Object.create(null)),
+              (this.metadata[e][n] = r));
             return;
           }
           if (!(n in this.metadata[e])) {
@@ -1299,7 +1302,7 @@ window.translations = {
           }
         }),
         (t.Query = function (e) {
-          (this.clauses = []), (this.allFields = e);
+          ((this.clauses = []), (this.allFields = e));
         }),
         (t.Query.wildcard = new String('*')),
         (t.Query.wildcard.NONE = 0),
@@ -1338,22 +1341,22 @@ window.translations = {
               this
             );
           var r = n || {};
-          return (r.term = e.toString()), this.clause(r), this;
+          return ((r.term = e.toString()), this.clause(r), this);
         }),
         (t.QueryParseError = function (e, n, r) {
-          (this.name = 'QueryParseError'),
+          ((this.name = 'QueryParseError'),
             (this.message = e),
             (this.start = n),
-            (this.end = r);
+            (this.end = r));
         }),
         (t.QueryParseError.prototype = new Error()),
         (t.QueryLexer = function (e) {
-          (this.lexemes = []),
+          ((this.lexemes = []),
             (this.str = e),
             (this.length = e.length),
             (this.pos = 0),
             (this.start = 0),
-            (this.escapeCharPositions = []);
+            (this.escapeCharPositions = []));
         }),
         (t.QueryLexer.prototype.run = function () {
           for (var e = t.QueryLexer.lexText; e; ) e = e(this);
@@ -1364,9 +1367,9 @@ window.translations = {
             i < this.escapeCharPositions.length;
             i++
           )
-            (r = this.escapeCharPositions[i]),
+            ((r = this.escapeCharPositions[i]),
               e.push(this.str.slice(n, r)),
-              (n = r + 1);
+              (n = r + 1));
           return (
             e.push(this.str.slice(n, this.pos)),
             (this.escapeCharPositions.length = 0),
@@ -1374,34 +1377,34 @@ window.translations = {
           );
         }),
         (t.QueryLexer.prototype.emit = function (e) {
-          this.lexemes.push({
+          (this.lexemes.push({
             type: e,
             str: this.sliceString(),
             start: this.start,
             end: this.pos
           }),
-            (this.start = this.pos);
+            (this.start = this.pos));
         }),
         (t.QueryLexer.prototype.escapeCharacter = function () {
-          this.escapeCharPositions.push(this.pos - 1), (this.pos += 1);
+          (this.escapeCharPositions.push(this.pos - 1), (this.pos += 1));
         }),
         (t.QueryLexer.prototype.next = function () {
           if (this.pos >= this.length) return t.QueryLexer.EOS;
           var e = this.str.charAt(this.pos);
-          return (this.pos += 1), e;
+          return ((this.pos += 1), e);
         }),
         (t.QueryLexer.prototype.width = function () {
           return this.pos - this.start;
         }),
         (t.QueryLexer.prototype.ignore = function () {
-          this.start == this.pos && (this.pos += 1), (this.start = this.pos);
+          (this.start == this.pos && (this.pos += 1), (this.start = this.pos));
         }),
         (t.QueryLexer.prototype.backup = function () {
           this.pos -= 1;
         }),
         (t.QueryLexer.prototype.acceptDigitRun = function () {
           var e, n;
-          do (e = this.next()), (n = e.charCodeAt(0));
+          do ((e = this.next()), (n = e.charCodeAt(0)));
           while (n > 47 && n < 58);
           e != t.QueryLexer.EOS && this.backup();
         }),
@@ -1472,19 +1475,19 @@ window.translations = {
                 t.QueryLexer.lexBoost
               );
             if ((n == '+' && e.width() === 1) || (n == '-' && e.width() === 1))
-              return e.emit(t.QueryLexer.PRESENCE), t.QueryLexer.lexText;
+              return (e.emit(t.QueryLexer.PRESENCE), t.QueryLexer.lexText);
             if (n.match(t.QueryLexer.termSeparator))
               return t.QueryLexer.lexTerm;
           }
         }),
         (t.QueryParser = function (e, n) {
-          (this.lexer = new t.QueryLexer(e)),
+          ((this.lexer = new t.QueryLexer(e)),
             (this.query = n),
             (this.currentClause = {}),
-            (this.lexemeIdx = 0);
+            (this.lexemeIdx = 0));
         }),
         (t.QueryParser.prototype.parse = function () {
-          this.lexer.run(), (this.lexemes = this.lexer.lexemes);
+          (this.lexer.run(), (this.lexemes = this.lexer.lexemes));
           for (var e = t.QueryParser.parseClause; e; ) e = e(this);
           return this.query;
         }),
@@ -1493,11 +1496,11 @@ window.translations = {
         }),
         (t.QueryParser.prototype.consumeLexeme = function () {
           var e = this.peekLexeme();
-          return (this.lexemeIdx += 1), e;
+          return ((this.lexemeIdx += 1), e);
         }),
         (t.QueryParser.prototype.nextClause = function () {
           var e = this.currentClause;
-          this.query.clause(e), (this.currentClause = {});
+          (this.query.clause(e), (this.currentClause = {}));
         }),
         (t.QueryParser.parseClause = function (e) {
           var n = e.peekLexeme();
@@ -1512,8 +1515,8 @@ window.translations = {
               default:
                 var r = 'expected either a field or a term, found ' + n.type;
                 throw (
-                  (n.str.length >= 1 && (r += " with value '" + n.str + "'"),
-                  new t.QueryParseError(r, n.start, n.end))
+                  n.str.length >= 1 && (r += " with value '" + n.str + "'"),
+                  new t.QueryParseError(r, n.start, n.end)
                 );
             }
         }),
@@ -1577,8 +1580,8 @@ window.translations = {
         (t.QueryParser.parseTerm = function (e) {
           var n = e.consumeLexeme();
           if (n != null) {
-            (e.currentClause.term = n.str.toLowerCase()),
-              n.str.indexOf('*') != -1 && (e.currentClause.usePipeline = !1);
+            ((e.currentClause.term = n.str.toLowerCase()),
+              n.str.indexOf('*') != -1 && (e.currentClause.usePipeline = !1));
             var r = e.peekLexeme();
             if (r == null) {
               e.nextClause();
@@ -1586,15 +1589,15 @@ window.translations = {
             }
             switch (r.type) {
               case t.QueryLexer.TERM:
-                return e.nextClause(), t.QueryParser.parseTerm;
+                return (e.nextClause(), t.QueryParser.parseTerm);
               case t.QueryLexer.FIELD:
-                return e.nextClause(), t.QueryParser.parseField;
+                return (e.nextClause(), t.QueryParser.parseField);
               case t.QueryLexer.EDIT_DISTANCE:
                 return t.QueryParser.parseEditDistance;
               case t.QueryLexer.BOOST:
                 return t.QueryParser.parseBoost;
               case t.QueryLexer.PRESENCE:
-                return e.nextClause(), t.QueryParser.parsePresence;
+                return (e.nextClause(), t.QueryParser.parsePresence);
               default:
                 var i = "Unexpected lexeme type '" + r.type + "'";
                 throw new t.QueryParseError(i, r.start, r.end);
@@ -1617,15 +1620,15 @@ window.translations = {
             }
             switch (s.type) {
               case t.QueryLexer.TERM:
-                return e.nextClause(), t.QueryParser.parseTerm;
+                return (e.nextClause(), t.QueryParser.parseTerm);
               case t.QueryLexer.FIELD:
-                return e.nextClause(), t.QueryParser.parseField;
+                return (e.nextClause(), t.QueryParser.parseField);
               case t.QueryLexer.EDIT_DISTANCE:
                 return t.QueryParser.parseEditDistance;
               case t.QueryLexer.BOOST:
                 return t.QueryParser.parseBoost;
               case t.QueryLexer.PRESENCE:
-                return e.nextClause(), t.QueryParser.parsePresence;
+                return (e.nextClause(), t.QueryParser.parsePresence);
               default:
                 var i = "Unexpected lexeme type '" + s.type + "'";
                 throw new t.QueryParseError(i, s.start, s.end);
@@ -1648,15 +1651,15 @@ window.translations = {
             }
             switch (s.type) {
               case t.QueryLexer.TERM:
-                return e.nextClause(), t.QueryParser.parseTerm;
+                return (e.nextClause(), t.QueryParser.parseTerm);
               case t.QueryLexer.FIELD:
-                return e.nextClause(), t.QueryParser.parseField;
+                return (e.nextClause(), t.QueryParser.parseField);
               case t.QueryLexer.EDIT_DISTANCE:
                 return t.QueryParser.parseEditDistance;
               case t.QueryLexer.BOOST:
                 return t.QueryParser.parseBoost;
               case t.QueryLexer.PRESENCE:
-                return e.nextClause(), t.QueryParser.parsePresence;
+                return (e.nextClause(), t.QueryParser.parsePresence);
               default:
                 var i = "Unexpected lexeme type '" + s.type + "'";
                 throw new t.QueryParseError(i, s.start, s.end);
@@ -1671,10 +1674,10 @@ window.translations = {
               : (e.lunr = n());
         })(this, function () {
           return t;
-        });
+        }));
     })();
   });
-  var O,
+  var M,
     G = {
       getItem() {
         return null;
@@ -1683,21 +1686,21 @@ window.translations = {
     },
     K;
   try {
-    (K = localStorage), (O = K);
+    ((K = localStorage), (M = K));
   } catch {
-    (K = G), (O = G);
+    ((K = G), (M = G));
   }
   var S = {
-    getItem: (t) => O.getItem(t),
-    setItem: (t, e) => O.setItem(t, e),
+    getItem: (t) => M.getItem(t),
+    setItem: (t, e) => M.setItem(t, e),
     disableWritingLocalStorage() {
-      O = G;
+      M = G;
     },
     disable() {
-      localStorage.clear(), (O = G);
+      (localStorage.clear(), (M = G));
     },
     enable() {
-      O = K;
+      M = K;
     }
   };
   window.TypeDoc ||= {
@@ -1747,13 +1750,13 @@ window.translations = {
     kind_8388608: 'Document'
   };
   var pe = [];
-  function Y(t, e) {
+  function X(t, e) {
     pe.push({ selector: e, constructor: t });
   }
-  var X = class {
+  var Z = class {
     alwaysVisibleMember = null;
     constructor() {
-      this.createComponents(document.body),
+      (this.createComponents(document.body),
         this.ensureFocusedElementVisible(),
         this.listenForCodeCopies(),
         window.addEventListener('hashchange', () =>
@@ -1762,7 +1765,7 @@ window.translations = {
         document.body.style.display ||
           (this.ensureFocusedElementVisible(),
           this.updateIndexVisibility(),
-          this.scrollToHash());
+          this.scrollToHash()));
     }
     createComponents(e) {
       pe.forEach((n) => {
@@ -1794,19 +1797,20 @@ window.translations = {
       let e = document.querySelector('.tsd-navigation .current'),
         n = e?.parentElement;
       for (; n && !n.classList.contains('.tsd-navigation'); )
-        n instanceof HTMLDetailsElement && (n.open = !0), (n = n.parentElement);
-      if (e && !nt(e)) {
+        (n instanceof HTMLDetailsElement && (n.open = !0),
+          (n = n.parentElement));
+      if (e && !rt(e)) {
         let r =
           e.getBoundingClientRect().top -
           document.documentElement.clientHeight / 4;
-        (document.querySelector('.site-menu').scrollTop = r),
-          (document.querySelector('.col-sidebar').scrollTop = r);
+        ((document.querySelector('.site-menu').scrollTop = r),
+          (document.querySelector('.col-sidebar').scrollTop = r));
       }
     }
     updateIndexVisibility() {
       let e = document.querySelector('.tsd-index-content'),
         n = e?.open;
-      e && (e.open = !0),
+      (e && (e.open = !0),
         document.querySelectorAll('.tsd-index-section').forEach((r) => {
           r.style.display = 'block';
           let i = Array.from(r.querySelectorAll('.tsd-index-link')).every(
@@ -1814,7 +1818,7 @@ window.translations = {
           );
           r.style.display = i ? 'none' : 'block';
         }),
-        e && (e.open = n);
+        e && (e.open = n));
     }
     ensureFocusedElementVisible() {
       if (
@@ -1833,13 +1837,14 @@ window.translations = {
       let r = n.offsetParent == null,
         i = n;
       for (; i !== document.body; )
-        i instanceof HTMLDetailsElement && (i.open = !0), (i = i.parentElement);
+        (i instanceof HTMLDetailsElement && (i.open = !0),
+          (i = i.parentElement));
       if (n.offsetParent == null) {
-        (this.alwaysVisibleMember = n), n.classList.add('always-visible');
+        ((this.alwaysVisibleMember = n), n.classList.add('always-visible'));
         let s = document.createElement('p');
-        s.classList.add('warning'),
+        (s.classList.add('warning'),
           (s.textContent = window.translations.normally_hidden),
-          n.prepend(s);
+          n.prepend(s));
       }
       r && e.scrollIntoView();
     }
@@ -1847,7 +1852,7 @@ window.translations = {
       document.querySelectorAll('pre > button').forEach((e) => {
         let n;
         e.addEventListener('click', () => {
-          e.previousElementSibling instanceof HTMLElement &&
+          (e.previousElementSibling instanceof HTMLElement &&
             navigator.clipboard.writeText(
               e.previousElementSibling.innerText.trim()
             ),
@@ -1855,16 +1860,16 @@ window.translations = {
             e.classList.add('visible'),
             clearTimeout(n),
             (n = setTimeout(() => {
-              e.classList.remove('visible'),
+              (e.classList.remove('visible'),
                 (n = setTimeout(() => {
                   e.textContent = window.translations.copy;
-                }, 100));
-            }, 1e3));
+                }, 100)));
+            }, 1e3)));
         });
       });
     }
   };
-  function nt(t) {
+  function rt(t) {
     let e = t.getBoundingClientRect(),
       n = Math.max(document.documentElement.clientHeight, window.innerHeight);
     return !(e.bottom < 0 || e.top - n >= 0);
@@ -1872,10 +1877,10 @@ window.translations = {
   var fe = (t, e = 100) => {
     let n;
     return () => {
-      clearTimeout(n), (n = setTimeout(() => t(), e));
+      (clearTimeout(n), (n = setTimeout(() => t(), e)));
     };
   };
-  var Ie = tt(ye(), 1);
+  var Ie = nt(ye(), 1);
   async function R(t) {
     let e = Uint8Array.from(atob(t), (s) => s.charCodeAt(0)),
       r = new Blob([e])
@@ -1884,27 +1889,27 @@ window.translations = {
       i = await new Response(r).text();
     return JSON.parse(i);
   }
-  var Z = 'closing',
+  var Y = 'closing',
     ae = 'tsd-overlay';
-  function rt() {
-    let t = Math.abs(window.innerWidth - document.documentElement.clientWidth);
-    (document.body.style.overflow = 'hidden'),
-      (document.body.style.paddingRight = `${t}px`);
-  }
   function it() {
-    document.body.style.removeProperty('overflow'),
-      document.body.style.removeProperty('padding-right');
+    let t = Math.abs(window.innerWidth - document.documentElement.clientWidth);
+    ((document.body.style.overflow = 'hidden'),
+      (document.body.style.paddingRight = `${t}px`));
+  }
+  function st() {
+    (document.body.style.removeProperty('overflow'),
+      document.body.style.removeProperty('padding-right'));
   }
   function xe(t, e) {
-    t.addEventListener('animationend', () => {
-      t.classList.contains(Z) &&
-        (t.classList.remove(Z),
+    (t.addEventListener('animationend', () => {
+      t.classList.contains(Y) &&
+        (t.classList.remove(Y),
         document.getElementById(ae)?.remove(),
         t.close(),
-        it());
+        st());
     }),
       t.addEventListener('cancel', (n) => {
-        n.preventDefault(), ve(t);
+        (n.preventDefault(), ve(t));
       }),
       e?.closeOnClick &&
         document.addEventListener(
@@ -1913,22 +1918,22 @@ window.translations = {
             t.open && !t.contains(n.target) && ve(t);
           },
           !0
-        );
+        ));
   }
   function Ee(t) {
     if (t.open) return;
     let e = document.createElement('div');
-    (e.id = ae), document.body.appendChild(e), t.showModal(), rt();
+    ((e.id = ae), document.body.appendChild(e), t.showModal(), it());
   }
   function ve(t) {
     if (!t.open) return;
-    document.getElementById(ae)?.classList.add(Z), t.classList.add(Z);
+    (document.getElementById(ae)?.classList.add(Y), t.classList.add(Y));
   }
   var I = class {
     el;
     app;
     constructor(e) {
-      (this.el = e.el), (this.app = e.app);
+      ((this.el = e.el), (this.app = e.app));
     }
   };
   var be = document.head.appendChild(document.createElement('style'));
@@ -1942,7 +1947,7 @@ window.translations = {
     key;
     value;
     constructor(e) {
-      super(e),
+      (super(e),
         (this.key = `filter-${this.el.name}`),
         (this.value = this.el.checked),
         this.el.addEventListener('change', () => {
@@ -1951,30 +1956,30 @@ window.translations = {
         this.setLocalStorage(this.fromLocalStorage()),
         (be.innerHTML += `html:not(.${this.key}) .tsd-is-${this.el.name} { display: none; }
 `),
-        this.app.updateIndexVisibility();
+        this.app.updateIndexVisibility());
     }
     fromLocalStorage() {
       let e = S.getItem(this.key);
       return e ? e === 'true' : this.el.checked;
     }
     setLocalStorage(e) {
-      S.setItem(this.key, e.toString()),
+      (S.setItem(this.key, e.toString()),
         (this.value = e),
-        this.handleValueChange();
+        this.handleValueChange());
     }
     handleValueChange() {
-      (this.el.checked = this.value),
+      ((this.el.checked = this.value),
         document.documentElement.classList.toggle(this.key, this.value),
         (le[`tsd-is-${this.el.name}`] = this.value),
         this.app.filterChanged(),
-        this.app.updateIndexVisibility();
+        this.app.updateIndexVisibility());
     }
   };
   var Le = 0;
   async function Se(t, e) {
     if (!window.searchData) return;
     let n = await R(window.searchData);
-    (t.data = n), (t.index = Ie.Index.load(n.index)), (e.innerHTML = '');
+    ((t.data = n), (t.index = Ie.Index.load(n.index)), (e.innerHTML = ''));
   }
   function _e() {
     let t = document.getElementById('tsd-search-trigger'),
@@ -1986,7 +1991,7 @@ window.translations = {
     if (!(t && e && n && r && i && s))
       throw new Error('Search controls missing');
     let o = { base: document.documentElement.dataset.base };
-    o.base.endsWith('/') || (o.base += '/'),
+    (o.base.endsWith('/') || (o.base += '/'),
       i.addEventListener('error', () => {
         let a = window.translations.search_index_not_available;
         Pe(s, a);
@@ -1995,19 +2000,19 @@ window.translations = {
         Se(o, s);
       }),
       Se(o, s),
-      st({ trigger: t, searchEl: e, results: r, field: n, status: s }, o);
+      ot({ trigger: t, searchEl: e, results: r, field: n, status: s }, o));
   }
-  function st(t, e) {
+  function ot(t, e) {
     let { field: n, results: r, searchEl: i, status: s, trigger: o } = t;
     xe(i, { closeOnClick: !0 });
     function a() {
-      Ee(i), n.setSelectionRange(0, n.value.length);
+      (Ee(i), n.setSelectionRange(0, n.value.length));
     }
-    o.addEventListener('click', a),
+    (o.addEventListener('click', a),
       n.addEventListener(
         'input',
         fe(() => {
-          ot(r, n, s, e);
+          at(r, n, s, e);
         }, 200)
       ),
       n.addEventListener('keydown', (l) => {
@@ -2038,29 +2043,29 @@ window.translations = {
               f?.querySelector('a')?.click();
               break;
             case 'ArrowUp':
-              Te(r, n, f, -1), l.preventDefault();
+              (Te(r, n, f, -1), l.preventDefault());
               break;
             case 'ArrowDown':
-              Te(r, n, f, 1), l.preventDefault();
+              (Te(r, n, f, 1), l.preventDefault());
               break;
           }
-      });
+      }));
     function c() {
       ke(n);
     }
-    n.addEventListener('change', c),
+    (n.addEventListener('change', c),
       n.addEventListener('blur', c),
       n.addEventListener('click', c),
       document.body.addEventListener('keydown', (l) => {
         if (l.altKey || l.metaKey || l.shiftKey) return;
         let d = l.ctrlKey && l.key === 'k',
-          f = !l.ctrlKey && !ct() && l.key === '/';
+          f = !l.ctrlKey && !ut() && l.key === '/';
         (d || f) && (l.preventDefault(), a());
-      });
+      }));
   }
-  function ot(t, e, n, r) {
+  function at(t, e, n, r) {
     if (!r.index || !r.data) return;
-    (t.innerHTML = ''), (n.innerHTML = ''), (Le += 1);
+    ((t.innerHTML = ''), (n.innerHTML = ''), (Le += 1));
     let i = e.value.trim(),
       s;
     if (i) {
@@ -2085,9 +2090,9 @@ window.translations = {
       let c = s[a],
         l = r.data.rows[Number(c.ref)],
         d = 1;
-      l.name.toLowerCase().startsWith(i.toLowerCase()) &&
+      (l.name.toLowerCase().startsWith(i.toLowerCase()) &&
         (d *= 10 / (1 + Math.abs(l.name.length - i.length))),
-        (c.score *= d);
+        (c.score *= d));
     }
     s.sort((a, c) => c.score - a.score);
     let o = Math.min(10, s.length);
@@ -2095,22 +2100,22 @@ window.translations = {
       let c = r.data.rows[Number(s[a].ref)],
         d = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="tsd-kind-icon" aria-label="${window.translations[`kind_${c.kind}`].replaceAll('"', '&quot;')}"><use href="#icon-${c.icon || c.kind}"></use></svg>`,
         f = Ce(c.name, i);
-      globalThis.DEBUG_SEARCH_WEIGHTS &&
+      (globalThis.DEBUG_SEARCH_WEIGHTS &&
         (f += ` (score: ${s[a].score.toFixed(2)})`),
         c.parent &&
           (f = `<span class="parent">
-                ${Ce(c.parent, i)}.</span>${f}`);
+                ${Ce(c.parent, i)}.</span>${f}`));
       let p = document.createElement('li');
-      (p.id = `tsd-search:${Le}-${a}`),
+      ((p.id = `tsd-search:${Le}-${a}`),
         (p.role = 'option'),
         (p.ariaSelected = 'false'),
-        (p.classList.value = c.classes ?? '');
+        (p.classList.value = c.classes ?? ''));
       let v = document.createElement('a');
-      (v.tabIndex = -1),
+      ((v.tabIndex = -1),
         (v.href = r.base + c.url),
         (v.innerHTML = d + `<span class="text">${f}</span>`),
         p.append(v),
-        t.appendChild(p);
+        t.appendChild(p));
     }
   }
   function Te(t, e, n, r) {
@@ -2125,19 +2130,19 @@ window.translations = {
         console.error('Option missing');
         return;
       }
-      (i.ariaSelected = 'true'),
+      ((i.ariaSelected = 'true'),
         i.scrollIntoView({ behavior: 'smooth', block: 'nearest' }),
         e.setAttribute('aria-activedescendant', i.id),
-        n?.setAttribute('aria-selected', 'false');
+        n?.setAttribute('aria-selected', 'false'));
     }
   }
   function ke(t) {
     let e = t.getAttribute('aria-activedescendant');
-    (e ? document.getElementById(e) : null)?.setAttribute(
+    ((e ? document.getElementById(e) : null)?.setAttribute(
       'aria-selected',
       'false'
     ),
-      t.setAttribute('aria-activedescendant', '');
+      t.setAttribute('aria-activedescendant', ''));
   }
   function Ce(t, e) {
     if (e === '') return t;
@@ -2147,15 +2152,15 @@ window.translations = {
       s = 0,
       o = n.indexOf(r);
     for (; o != -1; )
-      i.push(
+      (i.push(
         te(t.substring(s, o)),
         `<mark>${te(t.substring(o, o + r.length))}</mark>`
       ),
         (s = o + r.length),
-        (o = n.indexOf(r, s));
-    return i.push(te(t.substring(s))), i.join('');
+        (o = n.indexOf(r, s)));
+    return (i.push(te(t.substring(s))), i.join(''));
   }
-  var at = {
+  var lt = {
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;',
@@ -2163,12 +2168,12 @@ window.translations = {
     '"': '&quot;'
   };
   function te(t) {
-    return t.replace(/[&<>"'"]/g, (e) => at[e]);
+    return t.replace(/[&<>"'"]/g, (e) => lt[e]);
   }
   function Pe(t, e) {
     t.innerHTML = e ? `<div>${e}</div>` : '';
   }
-  var lt = [
+  var ct = [
     'button',
     'checkbox',
     'file',
@@ -2179,37 +2184,37 @@ window.translations = {
     'reset',
     'submit'
   ];
-  function ct() {
+  function ut() {
     let t = document.activeElement;
     return t
       ? t.isContentEditable ||
         t.tagName === 'TEXTAREA' ||
         t.tagName === 'SEARCH'
         ? !0
-        : t.tagName === 'INPUT' && !lt.includes(t.type)
+        : t.tagName === 'INPUT' && !ct.includes(t.type)
       : !1;
   }
   var D = 'mousedown',
-    Oe = 'mousemove',
+    Me = 'mousemove',
     $ = 'mouseup',
     ne = { x: 0, y: 0 },
     Qe = !1,
     ce = !1,
-    ut = !1,
+    dt = !1,
     F = !1,
-    Me = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    Oe = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     );
-  document.documentElement.classList.add(Me ? 'is-mobile' : 'not-mobile');
-  Me &&
+  document.documentElement.classList.add(Oe ? 'is-mobile' : 'not-mobile');
+  Oe &&
     'ontouchstart' in document.documentElement &&
-    ((ut = !0), (D = 'touchstart'), (Oe = 'touchmove'), ($ = 'touchend'));
+    ((dt = !0), (D = 'touchstart'), (Me = 'touchmove'), ($ = 'touchend'));
   document.addEventListener(D, (t) => {
-    (ce = !0), (F = !1);
+    ((ce = !0), (F = !1));
     let e = D == 'touchstart' ? t.targetTouches[0] : t;
-    (ne.y = e.pageY || 0), (ne.x = e.pageX || 0);
+    ((ne.y = e.pageY || 0), (ne.x = e.pageX || 0));
   });
-  document.addEventListener(Oe, (t) => {
+  document.addEventListener(Me, (t) => {
     if (ce && !F) {
       let e = D == 'touchstart' ? t.targetTouches[0] : t,
         n = ne.x - (e.pageX || 0),
@@ -2227,21 +2232,21 @@ window.translations = {
     active;
     className;
     constructor(e) {
-      super(e),
+      (super(e),
         (this.className = this.el.dataset.toggle || ''),
         this.el.addEventListener($, (n) => this.onPointerUp(n)),
         this.el.addEventListener('click', (n) => n.preventDefault()),
         document.addEventListener(D, (n) => this.onDocumentPointerDown(n)),
-        document.addEventListener($, (n) => this.onDocumentPointerUp(n));
+        document.addEventListener($, (n) => this.onDocumentPointerUp(n)));
     }
     setActive(e) {
       if (this.active == e) return;
-      (this.active = e),
+      ((this.active = e),
         document.documentElement.classList.toggle('has-' + this.className, e),
-        this.el.classList.toggle('active', e);
+        this.el.classList.toggle('active', e));
       let n = (this.active ? 'to-has-' : 'from-has-') + this.className;
-      document.documentElement.classList.add(n),
-        setTimeout(() => document.documentElement.classList.remove(n), 500);
+      (document.documentElement.classList.add(n),
+        setTimeout(() => document.documentElement.classList.remove(n), 500));
     }
     onPointerUp(e) {
       F || (this.setActive(!0), e.preventDefault());
@@ -2257,9 +2262,9 @@ window.translations = {
         let n = e.target.closest('a');
         if (n) {
           let r = window.location.href;
-          r.indexOf('#') != -1 && (r = r.substring(0, r.indexOf('#'))),
+          (r.indexOf('#') != -1 && (r = r.substring(0, r.indexOf('#'))),
             n.href.substring(0, r.length) == r &&
-              setTimeout(() => this.setActive(!1), 250);
+              setTimeout(() => this.setActive(!1), 250));
         }
       }
     }
@@ -2270,14 +2275,14 @@ window.translations = {
       accordions = [];
       key;
       constructor(e, n) {
-        (this.key = e), (this.open = n);
+        ((this.key = e), (this.open = n));
       }
       add(e) {
-        this.accordions.push(e),
+        (this.accordions.push(e),
           (e.open = this.open),
           e.addEventListener('toggle', () => {
             this.toggle(e.open);
-          });
+          }));
       }
       toggle(e) {
         for (let n of this.accordions) n.open = e;
@@ -2299,24 +2304,24 @@ window.translations = {
         else {
           let o = S.getItem(i),
             a = o ? o === 'true' : this.el.open;
-          (s = new de(i, a)), ue.set(i, s);
+          ((s = new de(i, a)), ue.set(i, s));
         }
         s.add(this.el);
       }
     };
   function He(t) {
     let e = S.getItem('tsd-theme') || 'os';
-    (t.value = e),
+    ((t.value = e),
       Ae(e),
       t.addEventListener('change', () => {
-        S.setItem('tsd-theme', t.value), Ae(t.value);
-      });
+        (S.setItem('tsd-theme', t.value), Ae(t.value));
+      }));
   }
   function Ae(t) {
     document.documentElement.dataset.theme = t;
   }
   var se;
-  function Fe() {
+  function Ne() {
     let t = document.getElementById('tsd-nav-script');
     t && (t.addEventListener('load', Re), Re());
   }
@@ -2324,31 +2329,31 @@ window.translations = {
     let t = document.getElementById('tsd-nav-container');
     if (!t || !window.navigationData) return;
     let e = await R(window.navigationData);
-    (se = document.documentElement.dataset.base),
+    ((se = document.documentElement.dataset.base),
       se.endsWith('/') || (se += '/'),
-      (t.innerHTML = '');
-    for (let n of e) Ne(n, t, []);
-    window.app.createComponents(t),
+      (t.innerHTML = ''));
+    for (let n of e) Be(n, t, []);
+    (window.app.createComponents(t),
       window.app.showPage(),
-      window.app.ensureActivePageVisible();
+      window.app.ensureActivePageVisible());
   }
-  function Ne(t, e, n) {
+  function Be(t, e, n) {
     let r = e.appendChild(document.createElement('li'));
     if (t.children) {
       let i = [...n, t.text],
         s = r.appendChild(document.createElement('details'));
       s.className = t.class ? `${t.class} tsd-accordion` : 'tsd-accordion';
       let o = s.appendChild(document.createElement('summary'));
-      (o.className = 'tsd-accordion-summary'),
+      ((o.className = 'tsd-accordion-summary'),
         (o.dataset.key = i.join('$')),
         (o.innerHTML =
           '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg>'),
-        De(t, o);
+        De(t, o));
       let a = s.appendChild(document.createElement('div'));
       a.className = 'tsd-accordion-details';
       let c = a.appendChild(document.createElement('ul'));
       c.className = 'tsd-nested-navigation';
-      for (let l of t.children) Ne(l, c, i);
+      for (let l of t.children) Be(l, c, i);
     } else De(t, r, t.class);
   }
   function De(t, e, n) {
@@ -2365,22 +2370,31 @@ window.translations = {
         let i = window.translations[`kind_${t.kind}`].replaceAll('"', '&quot;');
         r.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="tsd-kind-icon" aria-label="${i}"><use href="#icon-${t.icon || t.kind}"></use></svg>`;
       }
-      r.appendChild(document.createElement('span')).textContent = t.text;
+      r.appendChild(Fe(t.text, document.createElement('span')));
     } else {
       let r = e.appendChild(document.createElement('span')),
         i = window.translations.folder.replaceAll('"', '&quot;');
-      (r.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="tsd-kind-icon" aria-label="${i}"><use href="#icon-folder"></use></svg>`),
-        (r.appendChild(document.createElement('span')).textContent = t.text);
+      ((r.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="tsd-kind-icon" aria-label="${i}"><use href="#icon-folder"></use></svg>`),
+        r.appendChild(Fe(t.text, document.createElement('span'))));
     }
+  }
+  function Fe(t, e) {
+    let n = t.split(
+      /(?<=[^A-Z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|(?<=[_-])(?=[^_-])/
+    );
+    for (let r = 0; r < n.length; ++r)
+      (r !== 0 && e.appendChild(document.createElement('wbr')),
+        e.appendChild(document.createTextNode(n[r])));
+    return e;
   }
   var oe = document.documentElement.dataset.base;
   oe.endsWith('/') || (oe += '/');
-  function Ve() {
+  function $e() {
     document.querySelector('.tsd-full-hierarchy')
-      ? dt()
-      : document.querySelector('.tsd-hierarchy') && ht();
+      ? ht()
+      : document.querySelector('.tsd-hierarchy') && pt();
   }
-  function dt() {
+  function ht() {
     document.addEventListener('click', (r) => {
       let i = r.target;
       for (; i.parentElement && i.parentElement.tagName != 'LI'; )
@@ -2401,26 +2415,26 @@ window.translations = {
     for (let r of e) n(r);
     function n(r) {
       let i = t.get(r).cloneNode(!0);
-      i.querySelectorAll('[id]').forEach((s) => {
+      (i.querySelectorAll('[id]').forEach((s) => {
         s.removeAttribute('id');
       }),
         i.querySelectorAll('[data-dropdown]').forEach((s) => {
           s.dataset.dropdown = 'false';
-        });
+        }));
       for (let s of document.querySelectorAll(`[data-refl="${r}"]`)) {
-        let o = mt(),
+        let o = gt(),
           a = s.querySelector('ul');
-        s.insertBefore(o, a),
+        (s.insertBefore(o, a),
           (o.dataset.dropdown = String(!!a)),
-          a || s.appendChild(i.cloneNode(!0));
+          a || s.appendChild(i.cloneNode(!0)));
       }
     }
   }
-  function ht() {
+  function pt() {
     let t = document.getElementById('tsd-hierarchy-script');
-    t && (t.addEventListener('load', Be), Be());
+    t && (t.addEventListener('load', Ve), Ve());
   }
-  async function Be() {
+  async function Ve() {
     let t = document.querySelector('.tsd-panel.tsd-hierarchy:has(h4 a)');
     if (!t || !window.hierarchyData) return;
     let e = +t.dataset.refl,
@@ -2429,12 +2443,12 @@ window.translations = {
       i = document.createElement('ul');
     if (
       (i.classList.add('tsd-hierarchy'),
-      pt(i, n, e),
+      ft(i, n, e),
       r.querySelectorAll('li').length == i.querySelectorAll('li').length)
     )
       return;
     let s = document.createElement('span');
-    s.classList.add('tsd-hierarchy-toggle'),
+    (s.classList.add('tsd-hierarchy-toggle'),
       (s.textContent = window.translations.hierarchy_expand),
       t.querySelector('h4 a')?.insertAdjacentElement('afterend', s),
       s.insertAdjacentText('beforebegin', ', '),
@@ -2446,45 +2460,45 @@ window.translations = {
           : (i.insertAdjacentElement('afterend', r),
             i.remove(),
             (s.textContent = window.translations.hierarchy_expand));
-      });
+      }));
   }
-  function pt(t, e, n) {
-    let r = e.roots.filter((i) => ft(e, i, n));
-    for (let i of r) t.appendChild($e(e, i, n));
+  function ft(t, e, n) {
+    let r = e.roots.filter((i) => mt(e, i, n));
+    for (let i of r) t.appendChild(je(e, i, n));
   }
-  function $e(t, e, n, r = new Set()) {
+  function je(t, e, n, r = new Set()) {
     if (r.has(e)) return;
     r.add(e);
     let i = t.reflections[e],
       s = document.createElement('li');
     if ((s.classList.add('tsd-hierarchy-item'), e === n)) {
       let o = s.appendChild(document.createElement('span'));
-      (o.textContent = i.name), o.classList.add('tsd-hierarchy-target');
+      ((o.textContent = i.name), o.classList.add('tsd-hierarchy-target'));
     } else {
       for (let a of i.uniqueNameParents || []) {
         let c = t.reflections[a],
           l = s.appendChild(document.createElement('a'));
-        (l.textContent = c.name),
+        ((l.textContent = c.name),
           (l.href = oe + c.url),
           (l.className = c.class + ' tsd-signature-type'),
-          s.append(document.createTextNode('.'));
+          s.append(document.createTextNode('.')));
       }
       let o = s.appendChild(document.createElement('a'));
-      (o.textContent = t.reflections[e].name),
+      ((o.textContent = t.reflections[e].name),
         (o.href = oe + i.url),
-        (o.className = i.class + ' tsd-signature-type');
+        (o.className = i.class + ' tsd-signature-type'));
     }
     if (i.children) {
       let o = s.appendChild(document.createElement('ul'));
       o.classList.add('tsd-hierarchy');
       for (let a of i.children) {
-        let c = $e(t, a, n, r);
+        let c = je(t, a, n, r);
         c && o.appendChild(c);
       }
     }
-    return r.delete(e), s;
+    return (r.delete(e), s);
   }
-  function ft(t, e, n) {
+  function mt(t, e, n) {
     if (e === n) return !0;
     let r = new Set(),
       i = [t.reflections[e]];
@@ -2500,7 +2514,7 @@ window.translations = {
     }
     return !1;
   }
-  function mt() {
+  function gt() {
     let t = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     return (
       t.setAttribute('width', '20'),
@@ -2511,16 +2525,16 @@ window.translations = {
       t
     );
   }
-  Y(re, 'a[data-toggle]');
-  Y(ie, '.tsd-accordion');
-  Y(ee, '.tsd-filter-item input[type=checkbox]');
-  var je = document.getElementById('tsd-theme');
-  je && He(je);
-  var gt = new X();
-  Object.defineProperty(window, 'app', { value: gt });
+  X(re, 'a[data-toggle]');
+  X(ie, '.tsd-accordion');
+  X(ee, '.tsd-filter-item input[type=checkbox]');
+  var qe = document.getElementById('tsd-theme');
+  qe && He(qe);
+  var yt = new Z();
+  Object.defineProperty(window, 'app', { value: yt });
   _e();
-  Fe();
-  Ve();
+  Ne();
+  $e();
   'virtualKeyboard' in navigator &&
     (navigator.virtualKeyboard.overlaysContent = !0);
 })();
