@@ -1,5 +1,7 @@
 # inject.min
 
+dependency injection made super easy - all you need | lazy register | with override | decorator support
+
 [<img src="https://img.shields.io/npm/v/inject.min?style=for-the-badge&color=success" alt="npm version" />](https://www.npmjs.com/package/inject.min?activeTab=versions)
 [<img src="https://img.shields.io/circleci/build/github/Jackie-Aniki/inject.min/main?style=for-the-badge" alt="build status" />](https://app.circleci.com/pipelines/github/Jackie-Aniki/inject.min)
 
